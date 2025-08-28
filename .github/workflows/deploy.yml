@@ -15,7 +15,7 @@ jobs:
           project_id: salon-autonomous-ai-467811
       - name: Build and Push Docker Image
         run: |
-          gcloud builds submit --tag gcr.io/salon-autonomous-ai-467811/mcp-server --region asia-south1 mcp-server/
+          gcloud builds submit --tag gcr.io/salon-autonomous-ai-467811/mcp-server-prod --region asia-south1 mcp-server/
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy mcp-server --image gcr.io/salon-autonomous-ai-467811/mcp-server --platform managed --region asia-south1 --allow-unauthenticated
+          gcloud run deploy mcp-server-prod --image gcr.io/salon-autonomous-ai-467811/mcp-server-prod --platform managed --region asia-south1 --allow-unauthenticated
