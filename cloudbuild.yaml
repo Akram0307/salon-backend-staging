@@ -1,0 +1,27 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/salon-autonomous-ai-467811/agent-zero-mcp-server', '.']
+
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/salon-autonomous-ai-467811/agent-zero-mcp-server']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+    - 'run'
+    - 'deploy'
+    - 'agent-zero-mcp-server'
+    - '--image'
+    - 'gcr.io/salon-autonomous-ai-467811/agent-zero-mcp-server'
+    - '--region'
+    - 'us-central1'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+    - '--port'
+    - '8080'
+
+images:
+  - 'gcr.io/salon-autonomous-ai-467811/agent-zero-mcp-server'
