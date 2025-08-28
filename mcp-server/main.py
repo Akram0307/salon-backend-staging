@@ -15,7 +15,7 @@ import json
 firestore_client = firestore.Client(project='salon-autonomous-ai-467811')
 pubsub_client = pubsub_v1.PublisherClient()
 subscriber_client = pubsub_v1.SubscriberClient()
-initialize_vertexai(project='salon-autonomous-ai-467811', location='us-central1')
+initialize_vertexai(project='salon-autonomous-ai-467811', location='asia-south1')
 
 # Constants
 PROJECT_ID = 'salon-autonomous-ai-467811'

@@ -1,0 +1,21 @@
+name: Deploy to Cloud Run
+on:
+  push:
+    branches:
+      - staging
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: salon-autonomous-ai-467811
+      - name: Build and Push Docker Image
+        run: |
+          gcloud builds submit --tag gcr.io/salon-autonomous-ai-467811/mcp-server --region asia-south1 mcp-server/
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy mcp-server --image gcr.io/salon-autonomous-ai-467811/mcp-server --platform managed --region asia-south1 --allow-unauthenticated
